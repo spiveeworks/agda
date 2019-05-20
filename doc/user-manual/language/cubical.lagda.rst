@@ -311,12 +311,18 @@ Partial elements
 
 In order to describe the homogeneous composition operations we need to
 be able to write partially specified n-dimensional cubes (i.e. cubes
-where some faces are missing). Given an element of the interval ``r :
-I`` there is a predicate ``IsOne`` which represents the constraint ``r
-= i1``. This comes with a proof that ``i1`` is in fact equal to ``i1``
-called ``1=1 : IsOne i1``. We use Greek letters like ``φ`` or ``ψ``
-when such an ``r`` should be thought of as being in the domain of
-``IsOne``.
+where some faces are missing).
+Specifically if we can define two faces of a cube, and a path that links 
+their endpoints, then we can compose them together to make the other 
+face of the cube or even a filled cube.
+
+In other words we wish to define the disconnected faces on either side of
+the cube, that is we wish to write families of terms that are only valid for
+the discrete values of ``I``, ``i0`` and ``i1``.
+For this there is the predicate ``IsOne``, which represents the constraint ``r = i1`` where ``r`` is an element of ``I``.
+We can then represent the constraint ``r = i0`` as ``IsOne (~ r)``.
+There is a proof of this predicate ``1=1 : IsOne i1``, though it is not usually used directly.
+Finally, we use Greek letters like ``φ`` or ``ψ`` to represent expressions that should be thought of as being in the domain of ``IsOne``, e.g. ``φ = r ∨ ~ r`` so that ``IsOne φ`` represents the constraint ``r = i0 or r = i1``. Similarly we could use ``φ = i ∧ j`` for ``i = i1 and j = i1``, or simply ``φ = i`` for ``i = i1``.
 
 Using this we introduce a type of partial elements called ``Partial φ
 A``, this is a special version of ``IsOne φ → A`` with a more
@@ -327,7 +333,6 @@ elements will still be considered the same). The idea is that
 ``Partial φ A`` is the type of cubes in ``A`` that are only defined
 when ``IsOne φ``.  There is also a dependent version of this called
 ``PartialP φ A`` which allows ``A`` to be defined only when ``IsOne
-φ``.
 
 .. code-block:: agda
 
@@ -371,6 +376,7 @@ Furthermore ``IsOne i0`` is actually absurd
   empty = λ { () }
 
 Cubical Agda also has cubical subtypes as in the CCHM type theory:
+[maybe have subtypes and hfill in their own section after hcomp?]
 
 ::
 
